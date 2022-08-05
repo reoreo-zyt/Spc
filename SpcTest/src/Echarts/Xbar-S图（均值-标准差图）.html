@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./echarts.js"></script>
+</head>
+<body>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <!-- 定义的 echart 容器 -->        
+        <!-- 标准差图 -->
+        <div id="standardMain" style="width: 600px; height: 400px"></div>
+        <!-- 均值图 -->
+        <div id="meanMain" style="width: 600px; height: 400px"></div>
+        <script>
+            // 从 C# 函数 GetData 中获取最终数据
+            UCLStandardDeviation = window.external.GetData("UCLStandardDeviation");
+            CLStandardDeviation = window.external.GetData("CLStandardDeviation");
+            LCLStandardDeviation = window.external.GetData("LCLStandardDeviation");
+
+            UCLMeanS = window.external.GetData("UCLMeanS");
+            CLMeanS = window.external.GetData("CLMeanS");
+            LCLMeanS = window.external.GetData("LCLMeanS");
+
+            calcNum = window.external.GetData("calcNum");
+
+            serialX = window.external.GetArrayData("serialX", calcNum).split(";");
+
+            standardDeviations = window.external.GetArrayData("standardDeviations", calcNum).split(";");
+            means = window.external.GetArrayData("means", calcNum).split(";");
+        </script>
+        <script>
+            // 渲染 echart
+
+            var myChart = echarts.init(document.getElementById('standardMain'));
+
+            //option
+            option = {
+                title: {
+                    text: "Xbar-S图（标准差图）",
+                },
+                tooltip: {
+                    trigger: "axis",
+                },
+                xAxis: {
+                    data: serialX,
+                },
+                yAxis: {
+                    min: 0,
+                    max: Math.ceil(UCLStandardDeviation + LCLStandardDeviation),
+                },
+                series: [
+                    {
+                        type: "line",
+                        data: standardDeviations,
+                        markLine: {
+                            data: [
+                                {
+                                    name: "UCL",
+                                    yAxis: UCLStandardDeviation,
+                                },
+                                {
+                                    name: "CL",
+                                    yAxis: CLStandardDeviation,
+                                },
+                                {
+                                    name: "LCL",
+                                    yAxis: LCLStandardDeviation,
+                                },
+                            ],
+                        },
+                    },
+                ],
+            };
+
+            myChart.setOption(option);
+        </script>
+        <script>
+            // 渲染 echart
+
+            var myChart2 = echarts.init(document.getElementById('meanMain'));
+
+            //option
+            option2 = {
+                title: {
+                    text: "Xbar-S图（均值图）",
+                },
+                tooltip: {
+                    trigger: "axis",
+                },
+                xAxis: {
+                    data: serialX,
+                },
+                yAxis: {
+                    min: Math.floor(LCLMeanS),
+                    max: Math.ceil(UCLMeanS),
+                },
+                series: [
+                    {
+                        type: "line",
+                        data: means,
+                        markLine: {
+                            data: [
+                                {
+                                    name: "UCL",
+                                    yAxis: UCLMeanS,
+                                },
+                                {
+                                    name: "CL",
+                                    yAxis: CLMeanS,
+                                },
+                                {
+                                    name: "LCL",
+                                    yAxis: LCLMeanS,
+                                },
+                            ],
+                        },
+                    },
+                ],
+            };
+
+            myChart2.setOption(option2);
+        </script>
+    </div>
+</body>
+</html>
