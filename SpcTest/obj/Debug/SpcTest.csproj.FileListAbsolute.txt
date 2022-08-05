@@ -9,7 +9,6 @@ C:\Users\reoreo\Desktop\Spc\SpcTest\obj\Debug\SpcTest.exe
 C:\Users\reoreo\Desktop\Spc\SpcTest\obj\Debug\SpcTest.pdb
 C:\Users\reoreo\Desktop\Spc\SpcTest\obj\Debug\SpcTest.csproj.CopyComplete
 C:\Users\reoreo\Desktop\Spc\SpcTest\obj\Debug\SpcTest.Form1.resources
-C:\Users\reoreo\Desktop\Spc\SpcTest\bin\Debug\src\Echarts\echarts.js
 C:\Users\reoreo\Desktop\Spc\SpcTest\bin\Debug\src\Echarts\Xbar-R图（均值－极差图）.html
 C:\Users\reoreo\Desktop\Spc\SpcTest\bin\Debug\src\Echarts\X-MR图（单值－移动极差图）.html
 C:\Users\reoreo\Desktop\Spc\SpcTest\bin\Debug\MathNet.Numerics.dll
